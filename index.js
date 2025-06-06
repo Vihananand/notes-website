@@ -41,9 +41,6 @@ app.get("/", async (req, res) => {
     }
 });
 
-// Middleware to filter the file title and remove special characters from them and warning them if any special character is used
-// app.use()
-
 const specialChar = /[^a-zA-Z0-9]/;
 
 app.post("/create", async (req, res) => {
