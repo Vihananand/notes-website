@@ -51,16 +51,19 @@ A modern, responsive web application for creating, managing, and organizing your
 ## 📋 Usage
 
 ### Creating a Note
+
 1. Enter a title (max 30 characters, no special characters)
 2. Write your note content (max 500 characters)
 3. Click "Save Note" to create your note
 
 ### Managing Notes
+
 - **View**: All notes are displayed in a grid layout on the homepage
 - **Read More/Less**: Click the toggle button to expand or collapse note content
 - **Delete**: Click the trash icon in the top-right corner of any note card
 
 ### Input Validation
+
 - **Title**: Must be 30 characters or less, no special characters allowed
 - **Content**: Must be 500 characters or less
 - Real-time character counters show current usage
@@ -69,18 +72,21 @@ A modern, responsive web application for creating, managing, and organizing your
 ## 🛠️ Technology Stack
 
 ### Backend
+
 - **Node.js**: JavaScript runtime environment
 - **Express.js**: Web application framework
 - **EJS**: Embedded JavaScript templating engine
 - **File System (fs)**: For note storage and management
 
 ### Frontend
+
 - **HTML5**: Semantic markup
 - **Tailwind CSS**: Utility-first CSS framework
 - **JavaScript (ES6+)**: Interactive functionality
 - **Toastify.js**: Toast notification library
 
 ### Styling & UI
+
 - **Inter Font**: Modern, clean typography
 - **Custom CSS**: Smooth animations and transitions
 - **Responsive Design**: Mobile-first approach
@@ -122,6 +128,7 @@ const port = process.env.PORT || 3000;
 Notes are stored as `.txt` files in the `./files` directory. Each note's filename is the title with spaces removed and a `.txt` extension.
 
 ### Character Limits
+
 - **Title**: 30 characters maximum
 - **Content**: 500 characters maximum
 
@@ -137,6 +144,7 @@ These limits can be adjusted in both the frontend JavaScript and backend validat
 
 ### Styling
 The application uses Tailwind CSS for styling. Key design elements include:
+
 - **Primary Color**: Indigo (#6366f1)
 - **Font**: Inter from Google Fonts
 - **Animations**: Smooth transitions and hover effects
@@ -151,6 +159,7 @@ To change character limits:
 ## 🔒 Error Handling
 
 The application includes comprehensive error handling:
+
 - **File System Errors**: Graceful handling of read/write failures
 - **Validation Errors**: User-friendly error messages
 - **Special Character Detection**: Prevents invalid filenames
@@ -159,6 +168,7 @@ The application includes comprehensive error handling:
 ## 📱 Responsive Design
 
 NotePro is designed to work seamlessly across devices:
+
 - **Desktop**: Full grid layout with hover effects
 - **Tablet**: Responsive grid that adapts to screen size
 - **Mobile**: Single column layout with touch-friendly buttons
@@ -195,6 +205,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Support
 
 If you encounter any issues or have questions, please:
+
 1. Check the existing issues in the repository
 2. Create a new issue with detailed description
 3. Include steps to reproduce any bugs
