@@ -25,22 +25,26 @@ A modern, responsive web application for creating, managing, and organizing your
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone <repository-url>
    cd notepro
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Create the files directory**
+
    ```bash
    mkdir files
    ```
 
 4. **Start the development server**
+
    ```bash
    npm start
    ```
@@ -118,6 +122,7 @@ notepro/
 ## ⚙️ Configuration
 
 ### Environment Variables
+
 The application runs on port 3000 by default. You can modify this in `index.js`:
 
 ```javascript
@@ -125,6 +130,7 @@ const port = process.env.PORT || 3000;
 ```
 
 ### File Storage
+
 Notes are stored as `.txt` files in the `./files` directory. Each note's filename is the title with spaces removed and a `.txt` extension.
 
 ### Character Limits
@@ -143,6 +149,7 @@ These limits can be adjusted in both the frontend JavaScript and backend validat
 ## 🎨 Customization
 
 ### Styling
+
 The application uses Tailwind CSS for styling. Key design elements include:
 
 - **Primary Color**: Indigo (#6366f1)
@@ -151,6 +158,7 @@ The application uses Tailwind CSS for styling. Key design elements include:
 - **Responsive**: Mobile-first design approach
 
 ### Modifying Limits
+
 To change character limits:
 
 1. **Frontend**: Update the HTML and JavaScript in `index.ejs`
