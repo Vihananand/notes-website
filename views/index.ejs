@@ -80,7 +80,7 @@
               <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
               <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
             </svg>
-            <span class="ml-2 text-xl font-bold text-gray-900">NotePro</span>
+            <a href="/" class="ml-2 text-xl font-bold text-gray-900">NotePro<a/>
           </div>
         </div>
 
@@ -163,8 +163,14 @@
               <p class="note-preview line-clamp-3 transition-all duration-300 ease-in-out overflow-hidden">
                 <%= file.content %>
               </p>
-              <button type="button" class="toggle-btn text-indigo-600 hover:text-indigo-700 font-medium mt-2">Read
-                More</button>
+              <div class="flex justify-between items-center w-full">
+                <button type="button" class="toggle-btn text-indigo-600 hover:text-indigo-700 font-medium mt-2">Read
+                  More</button>
+                <form action="/edit" method="post">
+                  <input type="hidden" name="title" value="<%= file.title %>">
+                  <button type="submit" class="text-indigo-600 hover:text-indigo-700 font-medium mt-2">Edit</button>
+                </form>
+              </div>
             </div>
           </div>
 
@@ -239,7 +245,7 @@
 
         toggleButtons.forEach(btn => {
           btn.addEventListener('click', () => {
-            const preview = btn.previousElementSibling;
+            const preview = btn.closest('.note-card').querySelector('.note-preview');
 
             preview.classList.toggle('line-clamp-3');
 
@@ -250,6 +256,7 @@
             }
           });
         });
+
       });
     </script>
 

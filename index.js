@@ -1,7 +1,7 @@
-import express from 'express'
-import { fileURLToPath } from 'url'
-import path from 'path'
-import fs from 'fs/promises'
+import express from "express";
+import { fileURLToPath } from "url";
+import path from "path";
+import fs from "fs/promises";
 
 const app = express();
 const port = 3000;
@@ -12,32 +12,31 @@ const __dirname = path.dirname(__filename);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
-app.use('/toastify', express.static(path.join(__dirname, 'node_modules', 'toastify-js', 'src')));
+app.use("/toastify", express.static(path.join(__dirname, "node_modules", "toastify-js", "src")));
 
-
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
 
 app.get("/", async (req, res) => {
-    try {
-        //readdir is used to read the files inside the directory
+    try { // readdir is used to read the files inside the directory
         const fileNames = await fs.readdir(`./files`);
 
-        const files = await Promise.all(
-            fileNames.map(async (file) => {
-                const content = await fs.readFile(`./files/${file}`, "utf-8");
-                return {
-                    title: file.replace(".txt", ""),
-                    content: content,
-                }
-            })
-        )
-        res.render("index", { files })
+        const files = await Promise.all(fileNames.map(async (file) => {
+            const content = await fs.readFile(`./files/${file}`, "utf-8");
+            return {
+                title: file.replace(".txt", ""),
+                content: content
+            };
+        }));
+        res.render("index", { files });
     } catch (err) {
         console.error("🔥 Error reading files:", err);
-        res.render("error", { message: "Error Fetching Notes🙀", submessage: "There was an error in fetching you notes. Please check your internet connection and try again!!" })
+        res.render("error", {
+            message: "Error Fetching Notes🙀",
+            submessage: "There was an error in fetching you notes. Please check your internet connection and try again!!"
+        });
     }
 });
 
@@ -47,11 +46,12 @@ app.post("/create", async (req, res) => {
     try {
         if (specialChar.test(req.body.title)) {
             res.render("error", {
-            message: "Error creating notes🙀",
-            submessage: "Your title probably has a special character in it. Please remove it and try again!!"
-        });
+                message: "Error creating notes🙀",
+                submessage: "Your title probably has a special character in it. Please remove it and try again!!"
+            });
         } else {
-            await fs.writeFile(`./files/${req.body.title.split(" ").join('')}.txt`, req.body.content);
+            await fs.writeFile(`./files/${req.body.title.split(" ").join("")
+                }.txt`, req.body.content);
             res.redirect("/?created=1");
         }
     } catch (err) {
@@ -63,16 +63,32 @@ app.post("/create", async (req, res) => {
     }
 });
 
-
 app.post("/delete", async (req, res) => {
     try {
-        await fs.unlink(`./files/${req.body.title}.txt`);
+        await fs.unlink(`./files/${req.body.title
+            }.txt`);
         res.redirect("/?deleted=1");
     } catch (err) {
         console.error("🔥 Error reading files:", err);
-        res.render("error", { message: "Error Deleting Note🙀", submessage: "There was an error in deleting you notes because either the note is already deleted or there is an server error. Please try!!" })
+        res.render("error", {
+            message: "Error Deleting Note🙀",
+            submessage: "There was an error in deleting you notes because either the note is already deleted or there is an server error. Please try!!"
+        });
     }
-})
+});
+
+app.post("/edit", async (req, res) => {
+    try {
+        const content = await fs.readFile(`./files/${req.body.title}.txt`);
+        res.render("edit", { note: { title: req.body.title, content: content } });
+    } catch (err) {
+        console.error("🔥 Error editing files:", err);
+        res.render("error", {
+            message: "Error Editing Note🙀",
+            submessage: "There was an error in editing you notes due to a backend server. Please try!!"
+        });
+    }
+});
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
